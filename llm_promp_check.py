@@ -92,22 +92,13 @@ client = OpenAI(
 )
 
 
-# import pickle
-# # kg_sorted = {}
-# kg_sorted = pickle.load(open("kg_sorted_prompt_check.pickle", "rb"))
-
 kg = KG(pickle.load(open(args.dbpedia_path, 'rb')))
 df = pd.read_csv(args.data_path + f'{args.set}.csv')
 
-
-# output_dir = f"llm_{args.set}"
-# os.makedirs(output_dir, exist_ok=True)
-# dfx = df[~df.index.isin([int(f.split('/')[-1].split('.')[0]) for f in glob.glob(f'{output_dir}/**.json', recursive=True)])]
 dfx= df
 print("Total rows to process", len(dfx))
 
 
-## read the evidence files
 all_evidence = {}
 for file in glob.glob(f'{args.evidence_path}/llm_{args.set}/**.json'):
     idx= int(file.split('/')[-1].split('.')[0])
@@ -127,33 +118,15 @@ def process_row(index, row, _shared_dict):
     resolved_entities = fuzzy_matchEntities(true_entities, predicted_entities, data)
     resolved_entities_relation= validateRelation(resolved_entities, row, kg)
     kg_results= kg.search(sorted(sorted(resolved_entities_relation.keys())), resolved_entities_relation)
-    # kg_sorted[index] = kg_results
-    # kg_results= kg_sorted[index]
     supporting_evidences = "\n".join([path for typ in ["connected", "walkable"] for path in paths_to_str2(kg_results[typ])])
-    
-    # breakpoint()
-    
-    # save_json_as = f"{output_dir}/{index}.json"
-    # if os.path.exists(save_json_as):
-    #     return
     text, output_decision = call_llm(row, supporting_evidences)
     _shared_dict[index] = [output_decision, text.replace("\n", "|")]
     print(index, output_decision)
-    # # with open(save_json_as, 'w') as f:
-    # #     json.dump(resolved_json, f, ensure_ascii=False)
 
 partial_process_row = partial(process_row, _shared_dict=real_predicted)
 with Pool(processes=args.num_proc) as pool:
     pool.starmap(partial_process_row, dfx.iterrows())
 
-# for index, row in dfx.iterrows():
-#     process_row(index, row, _shared_dict=real_predicted)
-
-# pickle.dump(kg_sorted, open("kg_sorted_prompt_check.pickle", "wb"))
-
-# Model served with vllm 
-#python -m vllm.entrypoints.openai.api_server  --model meta-llama/Meta-Llama-3-8B-Instruct --tensor-parallel-size 2
-# update dfx
 for key, value in real_predicted.items():
     dfx.at[key, 'Predicted'] = value[0]
     dfx.at[key, 'Response'] = value[1]
@@ -162,11 +135,7 @@ from sklearn.metrics import classification_report
 print(classification_report(list(dfx["Label"].values.tolist()), list(dfx["Predicted"].values.tolist())))
 
 dfx['Metadata'] = [ast.literal_eval(e) for e in dfx.Metatada]
-# find count of values insise list of all Metadata, value_counts() 
-unique_metadatas = dfx['Metadata'].apply(pd.Series).stack().value_counts()
-# sort items in the list of Metadata list and convert that to text and count unique combinations
-dfx['Metadata'].apply(lambda x: str(sorted(set(x)-set(['coll:model', 'coll:presup', 'written', 'substitution','question', 'num2', 'num3', 'num4'])))).value_counts()
-breakpoint()
+
 interetsing = ['num1', 'multi claim', 'existence', 'multi hop']
 from collections import defaultdict
 interetsing_list = defaultdict(list)
@@ -178,12 +147,11 @@ for index, row in dfx.iterrows():
     for each in interetsing:
         if (each in row['Metadata']):
             interetsing_list[each].append([row['Label'], row['Predicted']])
-## for each interesting, calculate the classification_report
+            
 for each in interetsing_list.keys():
     print(f"\nClassification report for {each}")
     print(classification_report([i[0] for i in interetsing_list[each]], [i[1] for i in interetsing_list[each]]))
 
-# dump index, precicted, Response, true_label to a file
 filtered_df = dfx[['Predicted', 'Response', 'Label']]
 if_llm_knowledge = "_llm_knowledge" if args.llm_knowledge else ""
 filtered_df.to_csv(f"llm_prompt_check_{args.set}{if_llm_knowledge}.csv", index=True)
