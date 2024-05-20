@@ -21,7 +21,8 @@ optional arguments:
 The script will output the evaluation results on the test set as well across all five reasoning types as reported on the paper and also save the model in the ./results directory.
 
 ####  Helper function for LLM-based fact-checking
-usage: llm_fact_check.py [-h] [--data_path DATA_PATH] [--dbpedia_path DBPEDIA_PATH] [--evidence_path EVIDENCE_PATH] [--set {test,train,val}]
+```python
+usage: python llm_fact_check.py [-h] [--data_path DATA_PATH] [--dbpedia_path DBPEDIA_PATH] [--evidence_path EVIDENCE_PATH] [--set {test,train,val}]
                           [--num_proc NUM_PROC] [--llm_knowledge] [--vllm_url VLLM_URL]
 
 optional arguments:
@@ -34,6 +35,7 @@ optional arguments:
   --num_proc NUM_PROC
   --llm_knowledge       If set, the instruction will be claim only LLM based fact checking.
   --vllm_url VLLM_URL   URL of the vLLM server, e.g., http://g002:8000
+```
 
 ### Set up Llama3-Instruct inference server using vLLM
 ####  Run on any server with NVIDIA A100 GPU (80 GB VRAM)
