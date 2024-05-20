@@ -91,7 +91,7 @@ if __name__ == "__main__":
     skip_second_stage =  True if args.skip_second_stage else False
     
     df = pd.read_csv(args.data_path + f'{args.set}.csv')
-    jsons = glob.glob(f'llm_full_v1/llm_{args.set}/**/*.json', recursive=True)
+    jsons = glob.glob(f'llm_v1_jsons/llm_{args.set}/**/*.json', recursive=True)
     print("Total rows to process", len(df))
 
     kg = KG(pickle.load(open(args.dbpedia_path, 'rb')))
