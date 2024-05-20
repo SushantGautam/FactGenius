@@ -18,11 +18,6 @@ import re
 import json
 import ast
 
-client = OpenAI(
-    api_key= "EMPTY",
-    base_url="http://g002:8000/v1",
-)
-
 @retry(stop_max_attempt_number=10, wait_fixed=0)
 def call_llm(claim, entities):
     entities_ = {key.replace('"', ''): value for key, value in entities.items()}
@@ -65,9 +60,15 @@ parser.add_argument("--data_path", default="/fp/projects01/ec30/factkg/full/")
 parser.add_argument("--dbpedia_path",default="/fp/projects01/ec30/factkg/dbpedia/dbpedia_2015_undirected_light.pickle")
 parser.add_argument("--set", choices=["test", "train", "val"], default="train")
 parser.add_argument("--num_proc", type=int, default=10)
+parser.add_argument("--base_url", default="http://g002:8000", help="URL of the vLLM server, e.g., http://g002:8000")
 
 args = parser.parse_args()
 print(args)
+
+client = OpenAI(
+    api_key= "EMPTY",
+    base_url= args.base_url + "/v1",
+)
 
 kg = KG(pickle.load(open(args.dbpedia_path, 'rb')))
 df = pd.read_csv(args.data_path + f'{args.set}.csv')

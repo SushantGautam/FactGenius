@@ -17,3 +17,22 @@ optional arguments:
   --data_path DATA_PATH
   --plot_roc            If set, the ROC curve will be plotted and saved.
 ```
+
+/global/D1/projects/HOST/Datasets/factKG_ifi/llm_v1/
+
+### Set up LaamaLlama3-Instruct inference server using vLLM
+####  Run on any server with NVIDIA A100 GPU (80 GB VRAM)
+```bash
+python -m vllm.entrypoints.openai.api_server  --model meta-llama/Meta-Llama-3-8B-Instruct
+```
+The server should be up and running on port 8000 at http://hostname:8000/v1 by default.
+
+### 1. Evaluating Zero-shot Claim Only Baseline
+```bash
+python train_hf.py --data_path
+```
+
+### 2. Train and evaluate RoBERTa as Claim Only Baseline
+```bash
+python train_hf.py 
+```
