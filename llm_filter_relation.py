@@ -61,8 +61,8 @@ def call_llm(claim, entities):
     return data
 
 parser = ArgumentParser()
-parser.add_argument("--data_path", default="/global/D1/projects/HOST/Datasets/factKG_ifi/full/")
-parser.add_argument("--dbpedia_path",default="/global/D1/projects/HOST/Datasets/factKG_ifi/dbpedia/dbpedia_2015_undirected_light.pickle")
+parser.add_argument("--data_path", default="/fp/projects01/ec30/factkg/full/")
+parser.add_argument("--dbpedia_path",default="/fp/projects01/ec30/factkg/dbpedia/dbpedia_2015_undirected_light.pickle")
 parser.add_argument("--set", choices=["test", "train", "val"], default="train")
 parser.add_argument("--num_proc", type=int, default=10)
 

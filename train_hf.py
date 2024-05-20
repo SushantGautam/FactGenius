@@ -114,7 +114,7 @@ parser.add_argument("--lr", type=float, default=5e-5)
 parser.add_argument("--model", default="roberta-base") # roberta-base:32, bert-base-uncased:64 on V100
 parser.add_argument("--epochs", type=int, default=15)
 parser.add_argument("--freeze", type=bool, default=False)
-parser.add_argument("--dbpedia_path",default="/global/D1/projects/HOST/Datasets/factKG_ifi/dbpedia/dbpedia_2015_undirected_light.pickle")
+parser.add_argument("--dbpedia_path",default="/fp/projects01/ec30/factkg/dbpedia/dbpedia_2015_undirected_light.pickle")
 parser.add_argument("--data_path", default="/global/D1/projects/HOST/Datasets/factKG_ifi/llm_v1/")
 parser.add_argument("--with_evidence", type=bool, default=False)
 parser.add_argument("--plot_roc", action="store_true", help="If set, the ROC curve will be plotted and saved.")
@@ -180,7 +180,7 @@ print(classification_report(test_result.label_ids, predictions))
 
 interetsing = ['num1', 'multi claim', 'existence', 'multi hop']
 
-dfx = pd.read_csv('/global/D1/projects/HOST/Datasets/factKG_ifi/full/test.csv')
+dfx = pd.read_csv('/fp/projects01/ec30/factkg/full/test.csv')
 dfx['Predicted'] = predictions #index is already same as test.csv
 
 dfx['Label'] = [1 if e == True else 0 for e in dfx.Label]
