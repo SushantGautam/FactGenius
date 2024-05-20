@@ -140,6 +140,7 @@ training_args = TrainingArguments(
     per_device_eval_batch_size=args.batch_size,
     warmup_steps=50,
     weight_decay=0.01,
+    auto_find_batch_size,
     logging_dir='./logs',
     logging_strategy="epoch",
     save_strategy="epoch",
@@ -175,7 +176,7 @@ print(classification_report(test_result.label_ids, predictions))
 
 interetsing = ['num1', 'multi claim', 'existence', 'multi hop']
 
-dfx = pd.read_csv('/fp/projects01/ec30/factkg/full/test.csv')
+dfx = pd.read_csv(args.data_path + 'test.csv')
 dfx['Predicted'] = predictions #index is already same as test.csv
 
 dfx['Label'] = [1 if e == True else 0 for e in dfx.Label]
