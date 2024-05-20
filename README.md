@@ -44,7 +44,7 @@ optional arguments:
 ```bash
 python -m vllm.entrypoints.openai.api_server  --model meta-llama/Meta-Llama-3-8B-Instruct
 ```
-The inference server should be up and running on port 8000 at http://hostname:8000/v1 by default. Remember to replace --vllm_url argument with appropriate server url when using LLM.
+The inference server should be up and running on port 8000 at http://hostname:8000 by default. Remember to replace --vllm_url argument with appropriate server url when using LLM.
 
 ### 1. Evaluating Zero-shot Claim Only Baseline with LLM
 ```bash
