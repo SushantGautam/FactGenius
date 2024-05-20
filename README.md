@@ -3,7 +3,7 @@
 
 
 ### Helper files
-#### Helper for training and evaluating the fact-checker model
+#### Helper for fine-tuning and evaluating the fact-checker model
 ```python
 usage: python train_hf.py [-h] [--batch_size BATCH_SIZE] [--lr LR] [--model MODEL] [--epochs EPOCHS] [--freeze FREEZE] [--dbpedia_path DBPEDIA_PATH]
                    [--data_path DATA_PATH] [--plot_roc]
@@ -51,14 +51,15 @@ The inference server should be up and running on port 8000 at http://hostname:80
 python python llm_fact_check.py --set test --llm_knowledge --vllm_url http://g002:8000
 ```
 
-### 2. Train and evaluate RoBERTa as Claim Only Baseline
+### 2. Fine-tune and evaluate RoBERTa as Claim Only Baseline
 ```bash
 python train_hf.py --model roberta-base --batch_size 32
 ```
-The trained model is pushed at: 
+The fine-tuned model is pushed at: 
 https://huggingface.co/SushantGautam/KG-LLM-roberta-base-claim_only.
+Can be loaded using the Hugging Face Transformers library and used for inference with appropriate tokenizer.
 
-### 3. Filtering connections and caching data for training and evaluation
+### 3. Filtering connections and caching data for fine-tuning and evaluation
 #### 3.1: Filtering Possible Connections with LLM
 ```bash
 python llm_filter_relation.py --set train --vllm_url http://g002:8000
@@ -108,7 +109,8 @@ python train_hf.py --model roberta-base --batch_size 32 --data_path ./llm_v1_sin
 python train_hf.py --model roberta-base --batch_size 32 --data_path ./llm_v1/
 ```
 
-The trained models are pushed at: 
+The fine-tuned models are pushed at: 
 https://huggingface.co/SushantGautam/KG-LLM-bert-base, 
 https://huggingface.co/SushantGautam/KG-LLM-roberta-base-single_stage and
 https://huggingface.co/SushantGautam/KG-LLM-roberta-base.
+Can be loaded using the Hugging Face Transformers library and used for inference with appropriate tokenizer.
