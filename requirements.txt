@@ -1,0 +1,10 @@
+fuzzywuzzy
+openai
+retrying
+numpy
+pandas
+torch
+scikit-learn
+transformers
+datasets
+matplotlib
