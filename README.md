@@ -5,7 +5,7 @@
 ### Helper files
 #### Helper for fine-tuning and evaluating the fact-checker model
 ```python
-usage: python train_hf.py [-h] [--batch_size BATCH_SIZE] [--lr LR] [--model MODEL] [--epochs EPOCHS] [--freeze FREEZE] [--dbpedia_path DBPEDIA_PATH]
+usage: python fine_tune_hf.py [-h] [--batch_size BATCH_SIZE] [--lr LR] [--model MODEL] [--epochs EPOCHS] [--freeze FREEZE] [--dbpedia_path DBPEDIA_PATH]
                    [--data_path DATA_PATH] [--plot_roc]
 
 optional arguments:
@@ -53,7 +53,7 @@ python python llm_fact_check.py --set test --llm_knowledge --vllm_url http://g00
 
 ### 2. Fine-tune and evaluate RoBERTa as Claim Only Baseline
 ```bash
-python train_hf.py --model roberta-base --batch_size 32
+python fine_tune_hf.py --model roberta-base --batch_size 32
 ```
 The fine-tuned model is pushed at: 
 https://huggingface.co/SushantGautam/KG-LLM-roberta-base-claim_only.
@@ -98,15 +98,15 @@ python llm_fact_check.py --set test --vllm_url http://g002:8000  --data_path ./l
 ### 5. Fine-tuning pre-trained models 
 #### 5.1: Fine-tuning Two-stage BERT classifier on the filtered data
 ```bash
-python train_hf.py --model bert-base-uncased --batch_size 64 --data_path ./llm_v1/
+python fine_tune_hf.py --model bert-base-uncased --batch_size 64 --data_path ./llm_v1/
 ```
 #### 5.2: Fine-tuning Single-stage RoBERTa classifier on the filtered data
 ```bash
-python train_hf.py --model roberta-base --batch_size 32 --data_path ./llm_v1_singleStage/
+python fine_tune_hf.py --model roberta-base --batch_size 32 --data_path ./llm_v1_singleStage/
 ```
 #### 5.3: Fine-tuning Two-stage RoBERTa classifier on the filtered data
 ```bash
-python train_hf.py --model roberta-base --batch_size 32 --data_path ./llm_v1/
+python fine_tune_hf.py --model roberta-base --batch_size 32 --data_path ./llm_v1/
 ```
 
 The fine-tuned models are pushed at: 
