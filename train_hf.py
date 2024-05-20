@@ -113,7 +113,6 @@ parser.add_argument("--batch_size", type=int, default=32)
 parser.add_argument("--lr", type=float, default=5e-5)
 parser.add_argument("--model", default="roberta-base") # roberta-base:32, bert-base-uncased:64 on V100
 parser.add_argument("--epochs", type=int, default=15)
-parser.add_argument("--freeze", type=bool, default=False)
 parser.add_argument("--dbpedia_path",default="/fp/projects01/ec30/factkg/dbpedia/dbpedia_2015_undirected_light.pickle")
 parser.add_argument("--data_path", default="/global/D1/projects/HOST/Datasets/factKG_ifi/llm_v1/")
 parser.add_argument("--plot_roc", action="store_true", help="If set, the ROC curve will be plotted and saved.")
@@ -133,9 +132,6 @@ datasets = transform_to_dataset(train_df, val_df, test_df, kg)
 
 # Load model
 model = AutoModelForSequenceClassification.from_pretrained(args.model, num_labels=2)
-if args.freeze:
-    for param in model.base_model.parameters():
-        param.requires_grad = False
 
 training_args = TrainingArguments(
     output_dir="./results/"+ args.model.replace("/", "_"),
