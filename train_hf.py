@@ -109,7 +109,7 @@ def compute_metrics(eval_pred):
     }
 
 parser = ArgumentParser()
-parser.add_argument("--batch_size", type=int, default=32)s
+parser.add_argument("--batch_size", type=int, default=32)
 parser.add_argument("--lr", type=float, default=5e-5)
 parser.add_argument("--model", default="roberta-base") # roberta-base:32, bert-base-uncased:64 on V100
 parser.add_argument("--epochs", type=int, default=15)
