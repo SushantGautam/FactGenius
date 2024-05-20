@@ -80,7 +80,7 @@ parser.add_argument("--dbpedia_path",default="/fp/projects01/ec30/factkg/dbpedia
 parser.add_argument("--evidence_path", default="/home/sushant/D1/Assignments/in5550_2024/exam/fact-checking/baseline/llm_full_v1", help="Path to the edvidence JSONs predicted by LLM.")
 parser.add_argument("--set", choices=["test", "train", "val"], default="train")
 parser.add_argument("--num_proc", type=int, default=10)
-parser.add_argument("--llm_knowledge", action="store_true", help="If set, the instruction will be for the knowledge graph based fact checking.")
+parser.add_argument("--llm_knowledge", action="store_true", help="If set, the instruction will be claim only LLM based fact checking.")
 parser.add_argument("--base_url", default="http://g002:8000", help="URL of the vLLM server, e.g., http://g002:8000")
 
 args = parser.parse_args()
@@ -147,7 +147,7 @@ for index, row in dfx.iterrows():
     for each in interetsing:
         if (each in row['Metadata']):
             interetsing_list[each].append([row['Label'], row['Predicted']])
-            
+
 for each in interetsing_list.keys():
     print(f"\nClassification report for {each}")
     print(classification_report([i[0] for i in interetsing_list[each]], [i[1] for i in interetsing_list[each]]))
