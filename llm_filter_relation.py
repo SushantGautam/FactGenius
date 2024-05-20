@@ -60,14 +60,14 @@ parser.add_argument("--data_path", default="/fp/projects01/ec30/factkg/full/")
 parser.add_argument("--dbpedia_path",default="/fp/projects01/ec30/factkg/dbpedia/dbpedia_2015_undirected_light.pickle")
 parser.add_argument("--set", choices=["test", "train", "val"], default="train")
 parser.add_argument("--num_proc", type=int, default=10)
-parser.add_argument("--base_url", default="http://g002:8000", help="URL of the vLLM server, e.g., http://g002:8000")
+parser.add_argument("--vllm_url", default="http://g002:8000", help="URL of the vLLM server, e.g., http://g002:8000")
 
 args = parser.parse_args()
 print(args)
 
 client = OpenAI(
     api_key= "EMPTY",
-    base_url= args.base_url + "/v1",
+    vllm_url= args.vllm_url + "/v1",
 )
 
 kg = KG(pickle.load(open(args.dbpedia_path, 'rb')))

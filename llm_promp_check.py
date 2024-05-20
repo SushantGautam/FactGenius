@@ -81,14 +81,14 @@ parser.add_argument("--evidence_path", default="/home/sushant/D1/Assignments/in5
 parser.add_argument("--set", choices=["test", "train", "val"], default="train")
 parser.add_argument("--num_proc", type=int, default=10)
 parser.add_argument("--llm_knowledge", action="store_true", help="If set, the instruction will be claim only LLM based fact checking.")
-parser.add_argument("--base_url", default="http://g002:8000", help="URL of the vLLM server, e.g., http://g002:8000")
+parser.add_argument("--vllm_url", default="http://g002:8000", help="URL of the vLLM server, e.g., http://g002:8000")
 
 args = parser.parse_args()
 print(args)
 
 client = OpenAI(
     api_key= "EMPTY",
-    base_url= args.base_url + "/v1",
+    vllm_url= args.vllm_url + "/v1",
 )
 
 
