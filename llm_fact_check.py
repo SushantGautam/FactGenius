@@ -77,7 +77,7 @@ def call_llm(row, evidences):
 parser = ArgumentParser()
 parser.add_argument("--data_path", default="/fp/projects01/ec30/factkg/full/")
 parser.add_argument("--dbpedia_path",default="/fp/projects01/ec30/factkg/dbpedia/dbpedia_2015_undirected_light.pickle")
-parser.add_argument("--evidence_path", default="/home/sushant/D1/Assignments/in5550_2024/exam/fact-checking/baseline/llm_full_v1", help="Path to the edvidence JSONs predicted by LLM.")
+parser.add_argument("--evidence_path", default="./llm_v1_jsons", help="Path to the edvidence JSONs predicted by LLM.")
 parser.add_argument("--set", choices=["test", "train", "val"], default="train")
 parser.add_argument("--num_proc", type=int, default=10)
 parser.add_argument("--llm_knowledge", action="store_true", help="If set, the instruction will be claim only LLM based fact checking.")

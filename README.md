@@ -94,7 +94,7 @@ This will output CSV files in ./llm_v1_singleStage/ directory. The output has be
 
 ### 4. Zero-shot LLM as Fact Classifier with evidence
 ```bash
-python llm_fact_check.py --set test --vllm_url http://g002:8000  --evidence_path ./llm_v1/
+python llm_fact_check.py --set test --vllm_url http://g002:8000  --evidence_path ./llm_v1_jsons
 ```
 
 ### 5. Fine-tuning pre-trained models 
