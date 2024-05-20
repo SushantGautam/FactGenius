@@ -3,7 +3,7 @@
 
 
 ### Helper files
-#### Helper for training fact-checker model
+#### Helper for training and evaluating the fact-checker model
 ```python
 usage: python train_hf.py [-h] [--batch_size BATCH_SIZE] [--lr LR] [--model MODEL] [--epochs EPOCHS] [--freeze FREEZE] [--dbpedia_path DBPEDIA_PATH]
                    [--data_path DATA_PATH] [--plot_roc]
@@ -21,7 +21,7 @@ optional arguments:
 The script will output the evaluation results on the test set as well across all five reasoning types as reported on the paper and also save the model in the ./results directory.
 
 ####  Helper function for LLM-based fact-checking
-usage: llm_promp_check.py [-h] [--data_path DATA_PATH] [--dbpedia_path DBPEDIA_PATH] [--evidence_path EVIDENCE_PATH] [--set {test,train,val}]
+usage: llm_fact_check.py [-h] [--data_path DATA_PATH] [--dbpedia_path DBPEDIA_PATH] [--evidence_path EVIDENCE_PATH] [--set {test,train,val}]
                           [--num_proc NUM_PROC] [--llm_knowledge] [--vllm_url VLLM_URL]
 
 optional arguments:
@@ -46,7 +46,7 @@ The server should be up and running on port 8000 at http://hostname:8000/v1 by d
 
 ### 1. Evaluating Zero-shot Claim Only Baseline with LLM
 ```bash
-python python llm_promp_check.py --set test --llm_knowledge --vllm_url http://g002:8000
+python python llm_fact_check.py --set test --llm_knowledge --vllm_url http://g002:8000
 ```
 
 ### 2. Train and evaluate RoBERTa as Claim Only Baseline
@@ -84,7 +84,7 @@ This will output CSV files in ./llm_v1_singleStage/ directory. The output has be
 
 ### 4. Zero-shot LLM as Fact Classifier
 ```bash
-python llm_promp_check.py --set test --vllm_url http://g002:8000
+python llm_fact_check.py --set test --vllm_url http://g002:8000
 ```
 
 ### 5. Fine-tuning pre-trained models 

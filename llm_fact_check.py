@@ -157,4 +157,4 @@ if_llm_knowledge = "_llm_knowledge" if args.llm_knowledge else ""
 filtered_df.to_csv(f"llm_prompt_check_{args.set}{if_llm_knowledge}.csv", index=True)
 print(f"saved to llm_prompt_check_{args.set}{if_llm_knowledge}.csv")
 
-# python llm_promp_check.py --set test --num_proc 50 [--llm_knowledge]
+# python llm_fact_check.py --set test --num_proc 50 [--llm_knowledge]
