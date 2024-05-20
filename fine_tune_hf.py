@@ -119,7 +119,7 @@ parser.add_argument("--plot_roc", action="store_true", help="If set, the ROC cur
 args = parser.parse_args()
 print(args)
 
-kg = KG(pickle.load(open(args.dbpedia_path, 'rb'))) if args.with_evidence else None
+kg = None # KG(pickle.load(open(args.dbpedia_path, 'rb'))), we don't need KG for our modified dataset
 
 tokenizer = AutoTokenizer.from_pretrained(args.model)
 
