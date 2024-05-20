@@ -20,8 +20,10 @@ optional arguments:
 
 /global/D1/projects/HOST/Datasets/factKG_ifi/llm_v1/
 
-### Set up LaamaLlama3-Instruct inference server using vLLM
+### Set up Llama3-Instruct inference server using vLLM
 ####  Run on any server with NVIDIA A100 GPU (80 GB VRAM)
+####  Request access to the model at https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct. 
+####  Make sure you have logged in to Hugging Face with `huggingface-cli whoami` and have access to the model.
 ```bash
 python -m vllm.entrypoints.openai.api_server  --model meta-llama/Meta-Llama-3-8B-Instruct
 ```
