@@ -59,6 +59,8 @@ The fine-tuned model is pushed at:
 https://huggingface.co/SushantGautam/KG-LLM-roberta-base-claim_only.
 Can be loaded using the Hugging Face Transformers library and used for inference with appropriate tokenizer.
 
+ The finetuning logs and metrics can be found at https://wandb.ai/ubl/FactKG_IN9550/runs/ui83kr9l.
+
 ### 3. Filtering connections and caching data for fine-tuning and evaluation
 #### 3.1: Filtering Possible Connections with LLM
 ```bash
@@ -114,3 +116,5 @@ https://huggingface.co/SushantGautam/KG-LLM-bert-base,
 https://huggingface.co/SushantGautam/KG-LLM-roberta-base-single_stage and
 https://huggingface.co/SushantGautam/KG-LLM-roberta-base.
 Can be loaded using the Hugging Face Transformers library and used for inference with appropriate tokenizer.
+
+ The finetuning logs and metrics can be found at https://wandb.ai/ubl/FactKG_IN9550/runs/7sf9kelb, https://wandb.ai/ubl/FactKG_IN9550/runs/sweuj8g6 and https://wandb.ai/ubl/FactKG_IN9550/runs/m5vqnfcr.
