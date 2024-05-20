@@ -67,26 +67,31 @@ python llm_filter_relation.py --set test --vllm_url http://g002:8000
 ```
 This will output JSON files in ./llm_train, ./llm_val, and ./llm_test directories. The output directories have been saved as zip file: llm_v1_jsons.zip.
 
+Assume ./llm_train, ./llm_val, and ./llm_test directories with JSONS are made available inside the ./llm_v1_jsons/ directory. Or can get them by unzipping the llm_v1_jsons.zip file.
+```bash
+unzip llm_v1_jsons.zip
+```
+
 #### 3.2: Fuzzy Relation Mining
 ##### 3.2.1: Two-stage Fuzzy Relation Mining
 ```bash
-python mine_llm_filtered_relation.py --set train --outputPath ./llm_v1/
-python mine_llm_filtered_relation.py --set val --outputPath ./llm_v1/
-python mine_llm_filtered_relation.py --set test --outputPath ./llm_v1/
+python mine_llm_filtered_relation.py --set train --outputPath ./llm_v1/ --jsons_path ./llm_v1_jsons/
+python mine_llm_filtered_relation.py --set val --outputPath ./llm_v1/ --jsons_path ./llm_v1_jsons/
+python mine_llm_filtered_relation.py --set test --outputPath ./llm_v1/ --jsons_path ./llm_v1_jsons/
 ```
 This will output CSV files in ./llm_v1/ directory. The output has been made available in the repo already.
 
 ##### 3.2.1: Single-stage Fuzzy Relation Mining
 ```bash
-python mine_llm_filtered_relation.py --set train --outputPath ./llm_v1_singleStage/ --skip_second_stage
-python mine_llm_filtered_relation.py --set val --outputPath ./llm_v1_singleStage/ --skip_second_stage
-python mine_llm_filtered_relation.py --set test --outputPath ./llm_v1_singleStage/ --skip_second_stage
+python mine_llm_filtered_relation.py --set train --outputPath ./llm_v1_singleStage/ --jsons_path ./llm_v1_jsons/ --skip_second_stage 
+python mine_llm_filtered_relation.py --set val --outputPath ./llm_v1_singleStage/ --jsons_path ./llm_v1_jsons/ --skip_second_stage
+python mine_llm_filtered_relation.py --set test --outputPath ./llm_v1_singleStage/ --jsons_path ./llm_v1_jsons/ --skip_second_stage
 ```
 This will output CSV files in ./llm_v1_singleStage/ directory. The output has been made available in the repo already.
 
-### 4. Zero-shot LLM as Fact Classifier
+### 4. Zero-shot LLM as Fact Classifier with evidence
 ```bash
-python llm_fact_check.py --set test --vllm_url http://g002:8000
+python llm_fact_check.py --set test --vllm_url http://g002:8000  --data_path ./llm_v1/
 ```
 
 ### 5. Fine-tuning pre-trained models 

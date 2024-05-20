@@ -10,7 +10,7 @@ from argparse import ArgumentParser
 from multiprocessing import Pool
 from functools import partial
 
-from mine_llm_filtered_relation import fuzzy_matchEntities, validateRelation, paths_to_str2
+from mine_ llm_filtered_relation import fuzzy_matchEntities, validateRelation, paths_to_str2
 
 from openai import OpenAI
 from retrying import retry

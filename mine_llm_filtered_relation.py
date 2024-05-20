@@ -85,13 +85,15 @@ if __name__ == "__main__":
     parser.add_argument("--num_proc", type=int, default=10)
     parser.add_argument("--outputPath", default="./llm_v1/")
     parser.add_argument("--skip_second_stage", action="store_true", help="If set, the second stage of relation validation will be skipped.")
+    parser.add_argument("--jsons_path", default="./llm_v1_jsons/", help="Path to the jsons files")
 
     args = parser.parse_args()
     print(args)
     skip_second_stage =  True if args.skip_second_stage else False
     
+    
     df = pd.read_csv(args.data_path + f'{args.set}.csv')
-    jsons = glob.glob(f'llm_v1_jsons/llm_{args.set}/**/*.json', recursive=True)
+    jsons = glob.glob(f'{args.jsons_path}llm_{args.set}/**/*.json', recursive=True)
     print("Total rows to process", len(df))
 
     kg = KG(pickle.load(open(args.dbpedia_path, 'rb')))
