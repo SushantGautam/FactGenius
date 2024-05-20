@@ -92,21 +92,21 @@ This will output CSV files in ./llm_v1_singleStage/ directory. The output has be
 
 ### 4. Zero-shot LLM as Fact Classifier with evidence
 ```bash
-python llm_fact_check.py --set test --vllm_url http://g002:8000  --data_path ./llm_v1/
+python llm_fact_check.py --set test --vllm_url http://g002:8000  --evidence_path ./llm_v1/
 ```
 
 ### 5. Fine-tuning pre-trained models 
 #### 5.1: Fine-tuning Two-stage BERT classifier on the filtered data
 ```bash
-python fine_tune_hf.py --model bert-base-uncased --batch_size 64 --data_path ./llm_v1/
+python fine_tune_hf.py --model bert-base-uncased --batch_size 64 --evidence_path ./llm_v1/
 ```
 #### 5.2: Fine-tuning Single-stage RoBERTa classifier on the filtered data
 ```bash
-python fine_tune_hf.py --model roberta-base --batch_size 32 --data_path ./llm_v1_singleStage/
+python fine_tune_hf.py --model roberta-base --batch_size 32 --evidence_path ./llm_v1_singleStage/
 ```
 #### 5.3: Fine-tuning Two-stage RoBERTa classifier on the filtered data
 ```bash
-python fine_tune_hf.py --model roberta-base --batch_size 32 --data_path ./llm_v1/
+python fine_tune_hf.py --model roberta-base --batch_size 32 --evidence_path ./llm_v1/
 ```
 
 The fine-tuned models are pushed at: 

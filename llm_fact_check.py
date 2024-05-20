@@ -98,28 +98,30 @@ df = pd.read_csv(args.data_path + f'{args.set}.csv')
 dfx= df
 print("Total rows to process", len(dfx))
 
-
-all_evidence = {}
-for file in glob.glob(f'{args.evidence_path}/llm_{args.set}/**.json'):
-    idx= int(file.split('/')[-1].split('.')[0])
-    if idx in dfx.index:
-        with open(file) as f:
-            all_evidence[idx]= json.load(f)
+if not args.llm_knowledge:
+    all_evidence = {}
+    for file in glob.glob(f'{args.evidence_path}/llm_{args.set}/**.json'):
+        idx= int(file.split('/')[-1].split('.')[0])
+        if idx in dfx.index:
+            with open(file) as f:
+                all_evidence[idx]= json.load(f)
     
 import multiprocessing
 manager = multiprocessing.Manager()
 real_predicted = manager.dict()
 
 def process_row(index, row, _shared_dict):
-    data = all_evidence[index]
-
-    true_entities = ast.literal_eval(row["Entity_set"])
-    predicted_entities= [k for k in data.keys() if data[k] != []]
-    resolved_entities = fuzzy_matchEntities(true_entities, predicted_entities, data)
-    resolved_entities_relation= validateRelation(resolved_entities, row, kg)
-    kg_results= kg.search(sorted(sorted(resolved_entities_relation.keys())), resolved_entities_relation)
-    supporting_evidences = "\n".join([path for typ in ["connected", "walkable"] for path in paths_to_str2(kg_results[typ])])
-    text, output_decision = call_llm(row, supporting_evidences)
+    if not args.llm_knowledge:
+        data = all_evidence[index]
+        true_entities = ast.literal_eval(row["Entity_set"])
+        predicted_entities= [k for k in data.keys() if data[k] != []]
+        resolved_entities = fuzzy_matchEntities(true_entities, predicted_entities, data)
+        resolved_entities_relation= validateRelation(resolved_entities, row, kg)
+        kg_results= kg.search(sorted(sorted(resolved_entities_relation.keys())), resolved_entities_relation)
+        supporting_evidences = "\n".join([path for typ in ["connected", "walkable"] for path in paths_to_str2(kg_results[typ])])
+        text, output_decision = call_llm(row, supporting_evidences)
+    else:
+        text, output_decision = call_llm(row, "")
     _shared_dict[index] = [output_decision, text.replace("\n", "|")]
     print(index, output_decision)
 
