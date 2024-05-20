@@ -83,7 +83,7 @@ if __name__ == "__main__":
     parser.add_argument("--dbpedia_path",default="/global/D1/projects/HOST/Datasets/factKG_ifi/dbpedia/dbpedia_2015_undirected_light.pickle")
     parser.add_argument("--set", choices=["test", "train", "val"], default="train")
     parser.add_argument("--num_proc", type=int, default=10)
-    parser.add_argument("--outputPath", default="/global/D1/projects/HOST/Datasets/factKG_ifi/llm_v1/")
+    parser.add_argument("--outputPath", default="./llm_v1/")
     parser.add_argument("--skip_second_stage", action="store_true", help="If set, the second stage of relation validation will be skipped.")
 
     args = parser.parse_args()
