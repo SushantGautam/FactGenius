@@ -18,12 +18,6 @@ import re
 import json
 import ast
 
-client = OpenAI(
-    api_key= "EMPTY",
-    base_url="http://g002:8000/v1",
-)
-
-
 @retry(stop_max_attempt_number=10, wait_fixed=0)
 def call_llm(row, evidences):
     claim= row.Sentence
@@ -87,9 +81,16 @@ parser.add_argument("--evidence_path", default="/home/sushant/D1/Assignments/in5
 parser.add_argument("--set", choices=["test", "train", "val"], default="train")
 parser.add_argument("--num_proc", type=int, default=10)
 parser.add_argument("--llm_knowledge", action="store_true", help="If set, the instruction will be for the knowledge graph based fact checking.")
+parser.add_argument("--base_url", default="http://g002:8000", help="URL of the vLLM server, e.g., http://g002:8000")
 
 args = parser.parse_args()
 print(args)
+
+client = OpenAI(
+    api_key= "EMPTY",
+    base_url= args.base_url + "/v1",
+)
+
 
 # import pickle
 # # kg_sorted = {}
