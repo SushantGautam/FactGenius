@@ -140,7 +140,7 @@ training_args = TrainingArguments(
     per_device_eval_batch_size=args.batch_size,
     warmup_steps=50,
     weight_decay=0.01,
-    auto_find_batch_size,
+    auto_find_batch_size=True,
     logging_dir='./logs',
     logging_strategy="epoch",
     save_strategy="epoch",
