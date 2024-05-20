@@ -67,7 +67,7 @@ print(args)
 
 client = OpenAI(
     api_key= "EMPTY",
-    vllm_url= args.vllm_url + "/v1",
+    base_url= args.vllm_url + "/v1",
 )
 
 kg = KG(pickle.load(open(args.dbpedia_path, 'rb')))

@@ -48,7 +48,7 @@ The inference server should be up and running on port 8000 at http://hostname:80
 
 ### 1. Evaluating Zero-shot Claim Only Baseline with LLM
 ```bash
-python python llm_fact_check.py --set test --llm_knowledge --vllm_url http://g002:8000
+python llm_fact_check.py --set test --llm_knowledge --vllm_url http://g002:8000
 ```
 
 ### 2. Fine-tune and evaluate RoBERTa as Claim Only Baseline
