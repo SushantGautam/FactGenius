@@ -70,17 +70,17 @@ This will output JSON files in ./llm_train, ./llm_val, and ./llm_test directorie
 #### 3.2: Fuzzy Relation Mining
 ##### 3.2.1: Two-stage Fuzzy Relation Mining
 ```bash
-python process_llm_filterrelation.py --set train --outputPath ./llm_v1/
-python process_llm_filterrelation.py --set val --outputPath ./llm_v1/
-python process_llm_filterrelation.py --set test --outputPath ./llm_v1/
+python mine_ llm_filtered_relation.py --set train --outputPath ./llm_v1/
+python mine_ llm_filtered_relation.py --set val --outputPath ./llm_v1/
+python mine_ llm_filtered_relation.py --set test --outputPath ./llm_v1/
 ```
 This will output CSV files in ./llm_v1/ directory. The output has been made available in the repo already.
 
 ##### 3.2.1: Single-stage Fuzzy Relation Mining
 ```bash
-python process_llm_filterrelation.py --set train --outputPath ./llm_v1_singleStage/ --skip_second_stage
-python process_llm_filterrelation.py --set val --outputPath ./llm_v1_singleStage/ --skip_second_stage
-python process_llm_filterrelation.py --set test --outputPath ./llm_v1_singleStage/ --skip_second_stage
+python mine_ llm_filtered_relation.py --set train --outputPath ./llm_v1_singleStage/ --skip_second_stage
+python mine_ llm_filtered_relation.py --set val --outputPath ./llm_v1_singleStage/ --skip_second_stage
+python mine_ llm_filtered_relation.py --set test --outputPath ./llm_v1_singleStage/ --skip_second_stage
 ```
 This will output CSV files in ./llm_v1_singleStage/ directory. The output has been made available in the repo already.
 
