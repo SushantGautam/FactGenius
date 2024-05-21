@@ -41,10 +41,14 @@ optional arguments:
 ####  Run on any server with NVIDIA A100 GPU (80 GB VRAM)
 ####  Request access to the model at https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct. 
 ####  Make sure you have logged in to Hugging Face with `huggingface-cli whoami` and have access to the model.
+#### Note: The output of graph filtering using LLM is made available in the repo already. So you can choose to skip inference server set-up and jump to fine-tuning pre-trained models and evaluating them.
+
 ```bash
 python -m vllm.entrypoints.openai.api_server  --model meta-llama/Meta-Llama-3-8B-Instruct
 ```
-The inference server should be up and running on port 8000 at http://hostname:8000 by default. Remember to replace --vllm_url argument with appropriate server url when using LLM.
+The inference server should be up and running on port 8000 at http://hostname:8000 by default. Remember to replace --vllm_url argument with appropriate server url when using LLM. 
+
+
 
 ### 1. Evaluating Zero-shot Claim Only Baseline with LLM
 ```bash
