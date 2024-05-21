@@ -38,10 +38,10 @@ optional arguments:
 ```
 
 ### Set up Llama3-Instruct inference server using vLLM
+#### Note: The output of graph filtering using LLM is made available in the repo already. So you can choose to skip inference server set-up and jump to fine-tuning pre-trained models and evaluating them.
 ####  Run on any server with NVIDIA A100 GPU (80 GB VRAM)
 ####  Request access to the model at https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct. 
 ####  Make sure you have logged in to Hugging Face with `huggingface-cli whoami` and have access to the model.
-#### Note: The output of graph filtering using LLM is made available in the repo already. So you can choose to skip inference server set-up and jump to fine-tuning pre-trained models and evaluating them.
 
 ```bash
 python -m vllm.entrypoints.openai.api_server  --model meta-llama/Meta-Llama-3-8B-Instruct
