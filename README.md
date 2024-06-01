@@ -1,4 +1,4 @@
-# KG-LLM: Zero-Shot Prompting and Fuzzy Relation Mining for Superior Reasoning on Knowledge Graphs
+# FactGenius: Combining Zero-Shot Prompting and Fuzzy Relation Mining to Improve Fact Verification with Knowledge Graphs
 ## Sushant Gautam's submission for IN5550 final exam: Fact-checking track
 
 
